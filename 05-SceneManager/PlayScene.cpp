@@ -1,3 +1,5 @@
+#pragma warning(disable : 4996)
+
 #include <iostream>
 #include <fstream>
 #include "AssetIDs.h"
@@ -25,6 +27,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
+#define SCENE_SECTION_BACKGROUND 3
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -161,6 +164,22 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	objects.push_back(obj);
 }
 
+// Parse a line in section [BACKGROUND]
+void CPlayScene::_ParseSection_BACKGROUND(string line)
+{
+	vector<string> tokens = split(line, ",");
+
+	if (tokens.size() == 7)
+	{
+		return;
+	}
+	for (int i = 0; i < tokens.size(); i++)
+	{
+		dataBG[heightBG][i] = atoi(tokens[i].c_str());
+	}
+	heightBG++;
+}
+
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
 {
 	DebugOut(L"[INFO] Start loading assets from : %s \n", assetFile);
@@ -214,6 +233,7 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		if (line == "[BACKGROUND]") { section = SCENE_SECTION_BACKGROUND; heightBG = 0; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
 
 		//
@@ -222,12 +242,12 @@ void CPlayScene::Load()
 		switch (section)
 		{ 
 			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break; 
+			case SCENE_SECTION_BACKGROUND: _ParseSection_BACKGROUND(line); break;
 		}
 	}
 
 	f.close();
-
 	DebugOut(L"[INFO] Done loading scene  %s\n", sceneFilePath);
 }
 

@@ -9,9 +9,13 @@
 //#include "Koopas.h"
 
 
-class CPlayScene: public CScene
+class CPlayScene : public CScene
 {
-protected: 
+protected:
+	//Create BackGround
+	int dataBG[200][200];
+	int heightBG = 0;
+
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;					
 
@@ -22,6 +26,7 @@ protected:
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
+	void _ParseSection_BACKGROUND(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 	
