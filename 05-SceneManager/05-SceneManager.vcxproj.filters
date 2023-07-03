@@ -95,6 +95,9 @@
       <Filter>Global\AnimationManager</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -164,5 +167,8 @@
       <Filter>Global\AnimationManager</Filter>
     </ClInclude>
     <ClInclude Include="AssetIDs.h" />
+    <ClInclude Include="Map.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

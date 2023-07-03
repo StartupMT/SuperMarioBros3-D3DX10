@@ -6,18 +6,16 @@
 #include "Brick.h"
 #include "Mario.h"
 #include "Goomba.h"
+#include "Map.h"
 //#include "Koopas.h"
 
 
 class CPlayScene : public CScene
 {
 protected:
-	//Create BackGround
-	int dataBG[200][200];
-	int heightBG = 0;
-
 	// A play scene has to have player, right? 
-	LPGAMEOBJECT player;					
+	LPGAMEOBJECT player;	
+	LPMAP map = nullptr;
 
 	vector<LPGAMEOBJECT> objects;
 
