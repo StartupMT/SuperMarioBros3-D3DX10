@@ -14,6 +14,6 @@ height	240
 # id	file 
 [TEXTURES]
 -100	Resource\Textures\bbox.png
-0	Resource\Textures\mario_png.png
-10	Resource\Textures\enemy_png.png
-20	Resource\Textures\misc_png.png
+100	Resource\Textures\mario_png.png
+200	Resource\Textures\enemy_png.png
+300	Resource\Textures\misc_png.png
