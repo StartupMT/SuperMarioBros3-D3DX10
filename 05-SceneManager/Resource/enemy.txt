@@ -1,0 +1,114 @@
+[SPRITES]
+2001000	9	11	16	16	10	spr-goomba-idle-0
+2001014	104	70	16	16	10	spr-red-goomba-idle-0
+2001015	125	70	16	16	10	spr-red-goomba-idle-1
+2001101	9	11	16	16	10	spr-goomba-walk-0
+2001102	32	11	16	16	10	spr-goomba-walk-1
+2001116	104	70	16	16	10	spr-red-goomba-walk-0
+2001117	125	70	16	16	10	spr-red-goomba-walk-1
+2001216	104	70	16	16	10	spr-red-goomba-walk-0
+2001217	125	70	16	16	10	spr-red-goomba-walk-1
+2001503	54	18	16	9	10	spr-goomba-die-0
+2001518	145	77	16	9	10	spr-red-goomba-die-0
+20020026	28	67	16	26	10	spr-red-koopa-troopa-move-0
+20020027	47	66	16	27	10	spr-red-koopa-troopa-move-1
+20020132	31	119	16	26	10	spr-green-koopa-troopa-move-0
+20020133	50	118	16	27	10	spr-green-koopa-troopa-move-1
+20021026	28	67	16	26	10	spr-red-koopa-troopa-move-0
+20021027	47	66	16	27	10	spr-red-koopa-troopa-move-1
+20021132	31	119	16	26	10	spr-green-koopa-troopa-move-0
+20021133	50	118	16	27	10	spr-green-koopa-troopa-move-1
+20022138	105	129	16	27	10	spr-green-koopa-paratroopa-fly-0
+20022139	126	130	16	26	10	spr-green-koopa-paratroopa-fly-1
+20022140	147	129	16	27	10	spr-green-koopa-paratroopa-fly-2
+20030030	50	96	16	16	10	spr-red-koopa-troopa-shell-run-1
+20030135	32	149	16	16	10	spr-green-koopa-troopa-shell-run-0
+20031030	50	96	16	16	10	spr-red-koopa-troopa-shell-run-1
+20031031	71	96	16	16	10	spr-red-koopa-troopa-shell-run-2
+20031136	53	148	16	16	10	spr-green-koopa-troopa-shell-run-1
+20031137	74	148	16	16	10	spr-green-koopa-troopa-shell-run-2
+20040018	7	33	16	32	10	spr-red-venus-fire-trap-headdown-0
+20040120	6	166	16	24	10	spr-green-venus-fire-trap-headdown-0
+20040265	236	66	16	32	10	spr-red-venus-head-down-1
+20040266	252	66	16	32	10	spr-red-venus-head-up-0
+20040370	252	34	16	32	10	spr-green-venus-head-up-0
+20040371	268	34	16	32	10	spr-green-venus-head-up-1
+20041019	7	71	16	32	10	spr-red-venus-fire-trap-headup-0
+20041121	6	195	16	24	10	spr-green-venus-fire-trap-headup-1
+20041267	268	66	16	32	10	spr-red-venus-head-up-1
+20041268	220	34	16	32	10	spr-green-venus-head-down-0
+20041372	0	0	0	0	10
+20041373	0	0	0	0	10
+
+[ANIMATIONS]
+#spr-goomba-idle-0
+200100	2001000	100
+
+#spr-red-goomba-idle-0
+200101	2001014	100	2001015	100
+
+#spr-goomba-walk-0
+200110	2001101	100	2001102	100
+
+#spr-red-goomba-walk-0
+200111	2001116	100	2001117	100
+
+#spr-red-goomba-walk-0
+200121	2001216	100	2001217	100
+
+#spr-goomba-die-0
+200150	2001503	100
+
+#spr-red-goomba-die-0
+200151	2001518	100
+
+#spr-red-koopa-troopa-move-0
+200200	20020026	100	20020027	100
+
+#spr-green-koopa-troopa-move-0
+200201	20020132	100	20020133	100
+
+#spr-red-koopa-troopa-move-0
+200210	20021026	100	20021027	100
+
+#spr-green-koopa-troopa-move-0
+200211	20021132	100	20021133	100
+
+#spr-green-koopa-paratroopa-fly-0
+200221	20022138	100	20022139	100	20022140	100
+
+#spr-red-koopa-troopa-shell-run-1
+200300	20030030	100
+
+#spr-green-koopa-troopa-shell-run-0
+200301	20030135	100
+
+#spr-red-koopa-troopa-shell-run-1
+200310	20031030	100	20031031	100
+
+#spr-green-koopa-troopa-shell-run-1
+200311	20031136	100	20031137	100
+
+#spr-red-venus-fire-trap-headdown-0
+200400	20040018	100
+
+#spr-green-venus-fire-trap-headdown-0
+200401	20040120	100
+
+#spr-red-venus-head-down-1
+200402	20040265	100	20040266	100
+
+#spr-green-venus-head-up-0
+200403	20040370	100	20040371	100
+
+#spr-red-venus-fire-trap-headup-0
+200410	20041019	100
+
+#spr-green-venus-fire-trap-headup-1
+200411	20041121	100
+
+#spr-red-venus-head-up-1
+200412	20041267	100	20041268	100
+
+#
+200413	20041372	100	20041373	100

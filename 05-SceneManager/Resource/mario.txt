@@ -1,135 +1,141 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
-#####  BIG ###############
-#IDLE
-11121	246	154	259	181	0
-11111	186	154	199	181	0
+10010019	254	9	12	15	0	spr-small-mario-idle-0
+1001102	254	9	12	15	0	spr-small-mario-walk-0
+1001103	269	8	15	16	0	spr-small-mario-walk-1
+1001112	254	9	12	15	0	spr-small-mario-walk-0
+1001113	269	8	15	16	0	spr-small-mario-walk-1
+1001126	323	8	16	16	0	spr-small-mario-run-0
+1001127	341	8	16	16	0	spr-small-mario-run-1
+1001134	287	8	14	16	0	spr-small-mario-skid-0
+1001205	304	8	16	16	0	spr-small-mario-jump-0
+1001215	304	8	16	16	0	spr-small-mario-jump-0
+1001228	360	8	16	16	0	spr-small-mario-high-jump-0
+10015010	416	8	16	16	0	spr-small-mario-die-0
+10020047	197	48	14	27	0	spr-big-mario-idle-0
+10021025	197	48	14	27	0	spr-big-mario-walk-0
+10021026	214	48	16	27	0	spr-big-mario-walk-1
+10021027	233	49	16	26	0	spr-big-mario-walk-2
+10021125	197	48	14	27	0	spr-big-mario-walk-0
+10021126	214	48	16	27	0	spr-big-mario-walk-1
+10021127	233	49	16	26	0	spr-big-mario-walk-2
+10021231	290	48	19	27	0	spr-big-mario-run-0
+10021232	312	48	19	27	0	spr-big-mario-run-1
+10021233	335	49	19	26	0	spr-big-mario-run-2
+10021328	252	47	16	28	0	spr-big-mario-skid-0
+10022029	271	49	16	26	0	spr-big-mario-jump-0
+10022130	233	49	16	26	0	spr-big-mario-fall-0
+10022234	357	49	19	26	0	spr-big-mario-high-jump-0
+10024035	379	57	14	18	0	spr-big-mario-crouch-0
+100300130	80	142	21	28	0	spr-raccoon-mario-idle-0
+10031096	80	142	21	28	0	spr-raccoon-mario-walk-0
+10031097	104	142	22	28	0	spr-raccoon-mario-walk-1
+10031098	129	143	23	27	0	spr-raccoon-mario-walk-2
+10031196	80	142	21	28	0	spr-raccoon-mario-walk-0
+10031197	104	142	22	28	0	spr-raccoon-mario-walk-1
+10031198	129	143	23	27	0	spr-raccoon-mario-walk-2
+100312108	283	143	23	27	0	spr-raccoon-mario-run-0
+100312109	309	143	23	27	0	spr-raccoon-mario-run-1
+100312110	335	142	22	28	0	spr-raccoon-mario-run-2
+10031399	155	140	16	30	0	spr-raccoon-mario-skid-0
+100320106	257	143	23	27	0	spr-raccoon-mario-jump-0
+100321107	283	143	23	27	0	spr-raccoon-mario-fall-0
+100322114	441	143	24	28	0	spr-raccoon-mario-fly-0
+100323114	441	143	24	28	0	spr-raccoon-mario-fly-0
+100323115	468	143	24	28	0	spr-raccoon-mario-fly-1
+100323116	495	142	24	28	0	spr-raccoon-mario-fly-2
+100330100	80	142	21	28	0	spr-raccoon-mario-spin-0
+100330101	78	107	23	28	0	spr-raccoon-mario-spin-1
+100330102	174	142	16	28	0	spr-raccoon-mario-spin-2
+100330103	193	142	23	28	0	spr-raccoon-mario-spin-3
+100330104	219	142	16	28	0	spr-raccoon-mario-spin-4
+100330105	80	142	21	28	0	spr-raccoon-mario-spin-5
+100340117	522	152	22	18	0	spr-raccoon-mario-crouch-0
 
-#WALKING RIGHT
-11222	275	154	290	181	0
-11223	304	154	321	181	0
-
-#WALKING LEFT
-11212	155	154	170	181	0
-11213	125	154	140	181	0
-
-#RUNNING RIGHT
-11321	334	154	355	181	0
-11322	334	154	355	181	0
-11323	392	154	413	181	0
-
-#RUNNING LEFT
-11311	91	154	112	181	0
-11312	65	154	86	181	0
-11313	34	154	55	181	0
-
-#JUMP WALK RIGHT
-11417	395	275	412	302	0
-11413	35	275	52	302	0
-
-#JUMP RUN RIGHT & LEFT
-11427	394	195	413	222	0
-11423	35	195	52	222	0
-
-#SIT RIGHT & LEFT 
-11521	426	239	441	256	0
-11511	5	239	20	256	0
-
-#BRACE RIGHT & LEFT 
-11621	425	154	442	181	0
-11611	5	154	22	181	0
-
-#DIE
-13001	215	120	234	137	0
-
-############ SMALL ################
- #IDLE
-12121	247	0	260	15	0
-12111	187	0	200	15	0
-
-#WALK RIGHT
-12222	275	0	292	15	0
-12223	306	0	321	15	0
-
-#WALK LEFT
-12212	155	0	170	15	0
-12213	125	0	140	15	0
-
-#RUN RIGHT
-12321	275	0	290	15	0
-12322	306	0	321	15	0
-12323	335	0	350	15	0
-
-#RUN LEFT
-12311	155	0	170	15	0
-12312	125	0	140	15	0
-12313	95	0	110	15	0
-
-#BRACE RIGHT & LEFT
-12511	6	0	19	15	0
-12521	426	0	439	15	0
-
-#JUMP WALK RIGHT & LEFT 
-12413	35	80	50	95	0
-12417	395	80	410	95	0
-
-#JUMP RUN RIGHT & LEFT 
-12423	65	40	80	55	0
-12427	365	40	380	55	0
-
-# ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
-400	11121	100
-401	11111	100
+#spr-small-mario-idle-0
+100100	10010019	100
 
-#WALKING RIGHT & LEFT 
-500	11121	100	11222	100	11223	100
-501	11111	100	11212	100	11213	100
+#spr-small-mario-walk-0
+100110	1001102	100	1001103	100
 
-#RUNNING RIGHT & LEFT
-600	11321	50	11322	50	11323	50
-601	11311	50	11312	50	11313	50
+#spr-small-mario-walk-0
+100111	1001112	50	1001113	50
 
-#JUMP WALK
-700	11417	100
-701	11413	100
+#spr-small-mario-run-0
+100112	1001126	10	1001127	10
 
-#JUMP RUN
-800	11427	100
-801	11423	100
+#spr-small-mario-skid-0
+100113	1001134	100
 
-#SIT RIGHT & LEFT 
-900	11521	100
-901	11511	100
+#spr-small-mario-jump-0
+100120	1001205	100
 
-#BRACE RIGHT & LEFT 
-1000	11621	100
-1001	11611	100
+#spr-small-mario-jump-0
+100121	1001215	100
 
-#DIE
-999	13001	100
+#spr-small-mario-high-jump-0
+100122	1001228	100
 
-################### SMALL #################
-1100	12121	100
-1102	12111	100
+#spr-small-mario-die-0
+100150	10015010	100
 
+#spr-big-mario-idle-0
+100200	10020047	100
 
-#WALK LEFT & RIGHT 
-1200	12121	100	12222	100	12223	100
-1201	12111	100	12212	100	12213	100
+#spr-big-mario-walk-0
+100210	10021025	100	10021026	100	10021027	100
 
-#RUN LEFT & RIGHT
-1300	12321	100	12322	100	12323	100
-1301	12311	100	12312	100	12313	100
+#spr-big-mario-walk-0
+100211	10021125	50	10021126	50	10021127	50
 
-#BRACE LEFT & RIGHT
-1401	12511	100
-1400	12521	100
+#spr-big-mario-run-0
+100212	10021231	10	10021232	10	10021233	10
 
-#JUMP WALK
-1500	12417	100
-1501	12413	100
+#spr-big-mario-skid-0
+100213	10021328	100
 
-#JUMP RUN 
-1601	12423	100
-1600	12427	100
+#spr-big-mario-jump-0
+100220	10022029	100
+
+#spr-big-mario-fall-0
+100221	10022130	100
+
+#spr-big-mario-high-jump-0
+100222	10022234	100
+
+#spr-big-mario-crouch-0
+100240	10024035	100
+
+#spr-raccoon-mario-idle-0
+100300	100300130	100
+
+#spr-raccoon-mario-walk-0
+100310	10031096	100	10031097	100	10031098	100
+
+#spr-raccoon-mario-walk-0
+100311	10031196	50	10031197	50	10031198	50
+
+#spr-raccoon-mario-run-0
+100312	100312108	10	100312109	10	100312110	10
+
+#spr-raccoon-mario-skid-0
+100313	10031399	100
+
+#spr-raccoon-mario-jump-0
+100320	100320106	100
+
+#spr-raccoon-mario-fall-0
+100321	100321107	100
+
+#spr-raccoon-mario-fly-0
+100322	100322114	100
+
+#spr-raccoon-mario-fly-0
+100323	100323114	50	100323115	50	100323116	50
+
+#spr-raccoon-mario-spin-0
+100330	100330100	50	100330101	50	100330102	50	100330103	50	100330104	50	100330105	50
+
+#spr-raccoon-mario-crouch-0
+100340	100340117	100
