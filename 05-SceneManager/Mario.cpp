@@ -6,7 +6,6 @@
 
 #include "Goomba.h"
 #include "Coin.h"
-#include "Portal.h"
 
 #include "Collision.h"
 
@@ -58,8 +57,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithEnemy(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithItem(e);
-	else if (dynamic_cast<CPortal*>(e->obj))
-		OnCollisionWithBlock(e);
+	//else if (dynamic_cast<CPortal*>(e->obj))
+	//	OnCollisionWithBlock(e);
 }
 
 void CMario::OnCollisionWithEnemy(LPCOLLISIONEVENT e)
@@ -94,19 +93,18 @@ void CMario::OnCollisionWithItem(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithBlock(LPCOLLISIONEVENT e)
 {
-	CPortal* p = (CPortal*)e->obj;
-	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
+	//CPortal* p = (CPortal*)e->obj;
+	//CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
 }
 
 void CMario::Render()
 {
-	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
+	aniId = ID_ANI_MARIO + state + type;
 
-	animations->Get(400)->Render(x, y);
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
-
+	RenderBoundingBox();
 	DebugOutTitle(L"Coins: %d", coin);
 }
 

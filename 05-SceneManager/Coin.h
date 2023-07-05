@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_COIN 11000
+#define ID_ANI_COIN 300000
 
 #define	COIN_WIDTH 10
 #define COIN_BBOX_WIDTH 10
@@ -12,7 +12,7 @@
 
 class CCoin : public CGameObject {
 public:
-	CCoin(float x, float y) : CGameObject(x, y) {}
+	CCoin(float x, float y) : CGameObject(x, y) { type = ITEM_TYPE_COIN; }
 	void Render();
 	void Update(DWORD dt) {}
 	void GetBoundingBox(float& l, float& t, float& r, float& b);

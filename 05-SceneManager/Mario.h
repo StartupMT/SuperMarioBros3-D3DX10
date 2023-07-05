@@ -4,8 +4,8 @@
 #include "Animations.h"
 #include "debug.h"
 
-#define MARIO_START_LIFE = 3;
-
+#define MARIO_START_LIFE 3
+#define ID_ANI_MARIO 100000
 
 #define MARIO_BIG_BBOX_WIDTH  14
 #define MARIO_BIG_BBOX_HEIGHT 24
@@ -44,6 +44,7 @@ public:
 		ax = 0.0f;
 		vy = OBJECT_GRAVITY;
 
+		state = OBJECT_STATE_STAND;
 		type = MARIO_TYPE_SMALL;
 		untouchable = false;
 		untouchable_start = -1;

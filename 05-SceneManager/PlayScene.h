@@ -3,7 +3,6 @@
 #include "Textures.h"
 #include "Scene.h"
 #include "GameObject.h"
-#include "Brick.h"
 #include "Mario.h"
 #include "Goomba.h"
 #include "Map.h"
@@ -14,7 +13,7 @@ class CPlayScene : public CScene
 {
 protected:
 	// A play scene has to have player, right? 
-	LPGAMEOBJECT player;	
+	CMario* player;	
 	LPMAP map = nullptr;
 
 	vector<LPGAMEOBJECT> objects;

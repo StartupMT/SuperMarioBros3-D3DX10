@@ -8,9 +8,7 @@
 #include "Utils.h"
 #include "Textures.h"
 #include "Sprites.h"
-#include "Portal.h"
 #include "Coin.h"
-#include "Platform.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -98,64 +96,43 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	vector<string> tokens = split(line);
 
 	// skip invalid lines - an object set must have at least id, x, y
-	if (tokens.size() < 2) return;
+	if (tokens.size() < 7) return;
 
-	int object_type = atoi(tokens[0].c_str());
-	float x = (float)atof(tokens[1].c_str());
-	float y = (float)atof(tokens[2].c_str());
+	//#TAG	TYPE	KIND	X	Y	W	H
+	int object_tag = atoi(tokens[0].c_str());
+	int object_type = atoi(tokens[1].c_str());
+	int object_kind = atoi(tokens[2].c_str());
+	float x = (float)atof(tokens[3].c_str());
+	float y = (float)atof(tokens[4].c_str());
+	float w = (float)atof(tokens[5].c_str());
+	float h = (float)atof(tokens[6].c_str());
 
 	CGameObject* obj = NULL;
 
-	switch (object_type)
+	switch (object_tag)
 	{
-	case OBJECT_TYPE_MARIO:
+	case OBJECT_TAG_PLAYER:
 		if (player != NULL)
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
-		obj = new CMario(x, y);
-		player = (CMario*)obj;
+		player = CMario::GetInstance();
+		obj = player;
+		obj->SetType(object_type);
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;
-	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
-	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
-
-	case OBJECT_TYPE_PLATFORM:
-	{
-
-		float cell_width = (float)atof(tokens[3].c_str());
-		float cell_height = (float)atof(tokens[4].c_str());
-		int length = atoi(tokens[5].c_str());
-		int sprite_begin = atoi(tokens[6].c_str());
-		int sprite_middle = atoi(tokens[7].c_str());
-		int sprite_end = atoi(tokens[8].c_str());
-
-		obj = new CPlatform(
-			x, y,
-			cell_width, cell_height, length,
-			sprite_begin, sprite_middle, sprite_end
-		);
-
-		break;
-	}
-
-	case OBJECT_TYPE_PORTAL:
-	{
-		float r = (float)atof(tokens[3].c_str());
-		float b = (float)atof(tokens[4].c_str());
-		int scene_id = atoi(tokens[5].c_str());
-		obj = new CPortal(x, y, r, b, scene_id);
-	}
-	break;
-
+	
+	case OBJECT_TAG_BLOCK: break;
+	case OBJECT_TAG_ENEMY: break;
+	case OBJECT_TAG_ITEM: obj = new CCoin(x, y); break;
 
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
 		return;
 	}
+	if (obj == NULL) return;
 
 	// General object setup
 	obj->SetPosition(x, y);
@@ -298,7 +275,6 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	map->Render();
-
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 }

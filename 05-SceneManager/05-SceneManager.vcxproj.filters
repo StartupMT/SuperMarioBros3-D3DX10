@@ -55,15 +55,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>GameObject\StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>GameObject\StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform.cpp">
-      <Filter>GameObject\StaticObject</Filter>
-    </ClCompile>
     <ClCompile Include="Mario.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
@@ -120,15 +111,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>GameObject\StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform.h">
-      <Filter>GameObject\StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>GameObject\StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
       <Filter>GameObject\Player</Filter>

@@ -26,7 +26,7 @@ protected:
 
 	int state;
 
-	int type;
+	int type = 0;
 
 	bool isDeleted;
 
@@ -44,7 +44,7 @@ public:
 	void RenderBoundingBox();
 
 	CGameObject();
-	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; }
+	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; state = OBJECT_STATE_STAND; }
 
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
