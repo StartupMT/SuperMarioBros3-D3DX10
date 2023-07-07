@@ -28,13 +28,6 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 
 #include "debug.h"
 #include "Game.h"
-#include "GameObject.h"
-#include "Textures.h"
-#include "Animation.h"
-#include "Animations.h"
-
-
-#include "SampleKeyEventHandler.h"
 
 #include "AssetIDs.h"
 
@@ -66,6 +59,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 */
 void Update(DWORD dt)
 {
+	CGame::GetInstance()->FixUpdate(dt);
 	CGame::GetInstance()->GetCurrentScene()->Update(dt);
 }
 

@@ -37,6 +37,9 @@ class CMario : public CGameObject
 	void OnCollisionWithBlock(LPCOLLISIONEVENT e);
 
 public:
+	int isRun = false;
+
+public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
@@ -52,7 +55,7 @@ public:
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
-	void SetState(int state, int direction = 1, bool isRun = 0);
+	void SetState(int state);
 
 	int IsCollidable()
 	{

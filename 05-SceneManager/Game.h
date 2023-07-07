@@ -18,7 +18,7 @@ using namespace std;
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
 
-
+#define FIX_UPDATE_TIME 200 //200ms
 
 /*
 	Our simple game framework
@@ -60,6 +60,7 @@ class CGame
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_SCENES(string line);
 
+	ULONGLONG lastTimeFixUpdate;
 public:
 	// Init DirectX, Sprite Handler
 	void Init(HWND hWnd, HINSTANCE hInstance);
@@ -114,6 +115,8 @@ public:
 
 	void _ParseSection_TEXTURES(string line);
 
+	void FixUpdate(DWORD dt);
+	bool isFixUpdateFrame = false;
 
 	~CGame();
 };

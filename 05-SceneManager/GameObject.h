@@ -36,6 +36,11 @@ protected:
 
 	bool isDraw = true;
 
+	float posYStartJump, velYStartFall, gravity, speedJump, jumpHeight;
+public:
+	int direction = 0;
+	bool isAllowJump = true, isFall = false;
+
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -77,8 +82,12 @@ public:
 
 	// Is this object blocking other object? If YES, collision framework will automatically push the other object
 	virtual int IsBlocking() { return 1; }
+	virtual int IsBlockingX() { return 0; }
 
 	~CGameObject();
 
 	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
+
+	virtual void JumpState();
+	virtual void StartJump(float speed = OBJECT_JUMP_SPEED, float max = OBJECT_JUMP_HEIGHT, float gravity = OBJECT_GRAVITY);
 };

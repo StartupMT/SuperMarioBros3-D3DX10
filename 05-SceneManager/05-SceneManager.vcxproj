@@ -160,7 +160,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="SampleKeyEventHandler.cpp" />
+    <ClCompile Include="MainKeyEventHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
@@ -182,7 +182,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="SampleKeyEventHandler.h" />
+    <ClInclude Include="MainKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />

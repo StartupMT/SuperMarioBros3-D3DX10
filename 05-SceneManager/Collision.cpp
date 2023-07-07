@@ -201,7 +201,7 @@ void CCollision::Filter(LPGAMEOBJECT objSrc,
 			continue;
 		}
 
-		if (c->t < min_tx && c->nx != 0 && filterX == 1) {
+		if (c->t < min_tx && c->nx != 0 && filterX == 1 && !c->obj->IsBlockingX()) {
 			min_tx = c->t; min_ix = i;
 		}
 

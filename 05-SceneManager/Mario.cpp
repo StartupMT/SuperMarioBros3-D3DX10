@@ -32,6 +32,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable = false;
 	}
 
+	JumpState();
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -39,6 +40,11 @@ void CMario::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
+	if (state != OBJECT_STATE_JUMP)
+	{
+		StartJump(0, 0);
+		isFall = true;
+	}
 }
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
@@ -46,7 +52,12 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
-		//if (e->ny < 0) isOnPlatform = true;
+		if (e->ny < 0)
+		{
+			if (isFall)
+				SetState(OBJECT_STATE_STAND);
+			vy = OBJECT_GRAVITY;
+		}
 	}
 	else
 		if (e->nx != 0 && e->obj->IsBlocking())
@@ -109,17 +120,22 @@ void CMario::Render()
 	DebugOutTitle(L"Coins: %d", coin);
 }
 
-void CMario::SetState(int state, int direction, bool isRun)
+void CMario::SetState(int state)
 {
 	// DIE is the end state, cannot be changed! 
-	//if (this->state == MARIO_STATE_DIE) return; 
+	if (this->state == OBJECT_STATE_DIE) return;
 
 	switch (state)
 	{
 	case OBJECT_STATE_STAND:
+		isAllowJump = true;
+		isFall = false;
+		vy = OBJECT_GRAVITY;
 		maxVx = 0;
 		ax = 0;
 		nx = 0;
+		if (direction != 0)
+			SetState(OBJECT_STATE_RUN);
 		break;
 	case OBJECT_STATE_RUN:
 		if (isSitting) break;
@@ -127,9 +143,14 @@ void CMario::SetState(int state, int direction, bool isRun)
 		ax = 1;
 		nx = direction;
 		break;
+	case OBJECT_STATE_JUMP:
+		if (this->state != state)
+		{
+			StartJump(OBJECT_JUMP_SPEED, MARIO_JUMP_HEIGHT);
+		}
+		break;
 	}
-
-	CGameObject::SetState(state);
+	this->state = state;
 }
 
 void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom)

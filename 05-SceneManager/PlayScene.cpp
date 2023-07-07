@@ -11,7 +11,7 @@
 #include "Item.h"
 #include "Block.h"
 
-#include "SampleKeyEventHandler.h"
+#include "MainKeyEventHandler.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 	CScene(id, filePath)
 {
 	player = NULL;
-	key_handler = new CSampleKeyHandler(this);
+	key_handler = new CMainKeyHandler(this);
 }
 
 

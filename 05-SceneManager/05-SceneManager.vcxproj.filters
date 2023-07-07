@@ -58,7 +58,7 @@
     <ClCompile Include="Mario.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="SampleKeyEventHandler.cpp">
+    <ClCompile Include="MainKeyEventHandler.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
@@ -118,7 +118,7 @@
     <ClInclude Include="Mario.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="SampleKeyEventHandler.h">
+    <ClInclude Include="MainKeyEventHandler.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">

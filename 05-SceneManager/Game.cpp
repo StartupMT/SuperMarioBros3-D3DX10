@@ -543,6 +543,19 @@ void CGame::_ParseSection_TEXTURES(string line)
 	CTextures::GetInstance()->Add(texID, path.c_str());
 }
 
+void CGame::FixUpdate(DWORD dt)
+{
+	ULONGLONG now = GetTickCount64();
+	if (now - lastTimeFixUpdate > FIX_UPDATE_TIME)
+	{
+		lastTimeFixUpdate = now;
+		isFixUpdateFrame = true;
+	}
+	else
+	{
+		isFixUpdateFrame = false;
+	}
+}
 
 CGame::~CGame()
 {
