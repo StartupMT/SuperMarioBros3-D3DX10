@@ -6,6 +6,7 @@
 
 #include "Goomba.h"
 #include "Item.h"
+#include "Block.h"
 
 #include "Collision.h"
 
@@ -57,8 +58,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithEnemy(e);
 	else if (dynamic_cast<CItem*>(e->obj))
 		OnCollisionWithItem(e);
-	//else if (dynamic_cast<CPortal*>(e->obj))
-	//	OnCollisionWithBlock(e);
+	else if (dynamic_cast<CBlock*>(e->obj))
+		OnCollisionWithBlock(e);
 }
 
 void CMario::OnCollisionWithEnemy(LPCOLLISIONEVENT e)

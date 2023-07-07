@@ -9,6 +9,7 @@
 #include "Textures.h"
 #include "Sprites.h"
 #include "Item.h"
+#include "Block.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -123,8 +124,13 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	
-	case OBJECT_TAG_BLOCK: break;
+	case OBJECT_TAG_BLOCK:
+		switch (object_type)
+		{
+		case BLOCK_TYPE_WALL:
+			obj = new CBlock(x, y, w, h);
+		}
+		break;
 	case OBJECT_TAG_ENEMY: break;
 	case OBJECT_TAG_ITEM: obj = new CItem(x, y); break;
 

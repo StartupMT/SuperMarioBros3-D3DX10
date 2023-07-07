@@ -32,6 +32,9 @@
     <Filter Include="Global\SpriteManager">
       <UniqueIdentifier>{28d61dd2-46fb-4463-9f1d-6a77bedb738b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Block">
+      <UniqueIdentifier>{6e712034-c610-41e6-93a2-548568301e20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -85,6 +88,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>GameObject\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +154,9 @@
     <ClInclude Include="AssetIDs.h" />
     <ClInclude Include="Map.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>GameObject\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
