@@ -10,7 +10,7 @@
 using namespace std;
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
-#define BBOX_ALPHA 0.25f		// Bounding box transparency
+#define BBOX_ALPHA 0.5f		// Bounding box transparency
 
 class CGameObject
 {
@@ -24,11 +24,17 @@ protected:
 
 	int nx;
 
+	int tag;
+
 	int state;
 
 	int type = 0;
 
+	int kind = 0;
+
 	bool isDeleted;
+
+	bool isDraw = true;
 
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
@@ -37,9 +43,12 @@ public:
 	void GetSpeed(float& vx, float& vy) { vx = this->vx; vy = this->vy; }
 
 	int GetState() { return this->state; }
+	int GetTag() { return this->tag; }
 	int GetType() { return this->type; }
+	int GetKind() { return this->kind; }
 	virtual void Delete() { isDeleted = true; }
 	bool IsDeleted() { return isDeleted; }
+	bool IsDraw() { return isDraw; }
 
 	void RenderBoundingBox();
 
@@ -51,7 +60,10 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL) {};
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
+	virtual void SetTag(int tag) { this->tag = tag; }
 	virtual void SetType(int type) { this->type = type; }
+	virtual void SetKind(int kind) { this->kind = kind; }
+	virtual void SetDraw(bool flag) { isDraw = flag; }
 	//
 	// Collision ON or OFF ? This can change depending on object's state. For example: die
 	//

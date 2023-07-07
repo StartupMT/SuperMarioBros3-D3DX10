@@ -33,9 +33,6 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 #include "Animation.h"
 #include "Animations.h"
 
-#include "Mario.h"
-#include "Goomba.h"
-#include "Coin.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -47,8 +44,8 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 
 #define BACKGROUND_COLOR D3DXCOLOR(156.0f/255, 252.0f/255, 240.0f/255, 0.0f)
 
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_WIDTH 3200
+#define SCREEN_HEIGHT 2400
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

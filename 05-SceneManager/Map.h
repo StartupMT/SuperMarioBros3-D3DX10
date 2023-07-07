@@ -1,4 +1,5 @@
-#pragma 
+#pragma once
+
 #include "Animation.h"
 #include "Animations.h"
 

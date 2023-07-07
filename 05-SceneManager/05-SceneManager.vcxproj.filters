@@ -23,9 +23,6 @@
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{d46c1d34-3d6c-4080-aa10-000009f43f6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\StaticObject">
-      <UniqueIdentifier>{6d467a83-84d2-4832-be97-69da2202f683}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Global\AnimationManager">
       <UniqueIdentifier>{e11ff60a-95fb-49a8-9799-c9799264370f}</UniqueIdentifier>
     </Filter>
@@ -61,7 +58,7 @@
     <ClCompile Include="SampleKeyEventHandler.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Coin.cpp">
+    <ClCompile Include="Item.cpp">
       <Filter>GameObject\Item</Filter>
     </ClCompile>
     <ClCompile Include="Goomba.cpp">
@@ -118,7 +115,7 @@
     <ClInclude Include="SampleKeyEventHandler.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Coin.h">
+    <ClInclude Include="Item.h">
       <Filter>GameObject\Item</Filter>
     </ClInclude>
     <ClInclude Include="Goomba.h">

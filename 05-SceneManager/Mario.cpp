@@ -5,7 +5,7 @@
 #include "Game.h"
 
 #include "Goomba.h"
-#include "Coin.h"
+#include "Item.h"
 
 #include "Collision.h"
 
@@ -55,7 +55,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithEnemy(e);
-	else if (dynamic_cast<CCoin*>(e->obj))
+	else if (dynamic_cast<CItem*>(e->obj))
 		OnCollisionWithItem(e);
 	//else if (dynamic_cast<CPortal*>(e->obj))
 	//	OnCollisionWithBlock(e);

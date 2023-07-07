@@ -1,4 +1,4 @@
-#include "Map.h"
+﻿#include "Map.h"
 #include "Textures.h"
 #include "debug.h"
 
@@ -33,7 +33,7 @@ void Map::CreateTileSet()
 
 void Map::Render()
 {
-	if (IDMAP == 0) return;	//Map kh�ng c� background
+	if (IDMAP == 0) return;	//Map không có background
 	int xx = 100, yy = 100;
 	for (int h = 0; h < HeightMap; h++)
 		for (int w = 0; w < WidthMap; w++)
@@ -41,8 +41,8 @@ void Map::Render()
 			int id = dataBG[h][w];
 			if (id > 0)
 			{
-				int x = w * TILESET_WIDTH;
-				int y = h * TILESET_HEIGHT;
+				int x = (w + 0.5) * TILESET_WIDTH;	// Cộng trừ 0.5 do x,y là tâm
+				int y = (h - 0.5) * TILESET_HEIGHT;
 				CSprites::GetInstance()->Get(id - 1)->Draw(x, y);
 			}
 		}

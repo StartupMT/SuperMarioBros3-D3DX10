@@ -8,7 +8,7 @@
 #include "Utils.h"
 #include "Textures.h"
 #include "Sprites.h"
-#include "Coin.h"
+#include "Item.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -126,7 +126,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	case OBJECT_TAG_BLOCK: break;
 	case OBJECT_TAG_ENEMY: break;
-	case OBJECT_TAG_ITEM: obj = new CCoin(x, y); break;
+	case OBJECT_TAG_ITEM: obj = new CItem(x, y); break;
 
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
@@ -136,7 +136,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	// General object setup
 	obj->SetPosition(x, y);
-
+	obj->SetTag(object_tag);
+	obj->SetType(object_type);
+	obj->SetKind(object_kind);
 
 	objects.push_back(obj);
 }
@@ -244,8 +246,9 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
+	for (size_t i = 0; i < objects.size(); i++)
 	{
+		if (objects[i]->GetTag() == OBJECT_TAG_PLAYER) continue;
 		coObjects.push_back(objects[i]);
 	}
 
