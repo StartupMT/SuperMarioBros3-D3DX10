@@ -52,7 +52,7 @@ public:
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
-	void SetState(int state);
+	void SetState(int state, int direction = 1, bool isRun = 0);
 
 	int IsCollidable()
 	{

@@ -21,7 +21,7 @@ CMario* CMario::GetInstance()
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	//vy += ay * dt;
-	//vx += ax * dt;
+	vx += ax * dt;
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
 
@@ -109,13 +109,24 @@ void CMario::Render()
 	DebugOutTitle(L"Coins: %d", coin);
 }
 
-void CMario::SetState(int state)
+void CMario::SetState(int state, int direction, bool isRun)
 {
 	// DIE is the end state, cannot be changed! 
 	//if (this->state == MARIO_STATE_DIE) return; 
 
 	switch (state)
 	{
+	case OBJECT_STATE_STAND:
+		maxVx = 0;
+		ax = 0;
+		nx = 0;
+		break;
+	case OBJECT_STATE_RUN:
+		if (isSitting) break;
+		maxVx = direction * MARIO_WALK_SPEED;
+		ax = 1;
+		nx = direction;
+		break;
 	}
 
 	CGameObject::SetState(state);

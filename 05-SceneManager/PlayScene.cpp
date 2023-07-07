@@ -107,7 +107,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float y = (float)atof(tokens[4].c_str());
 	float w = (float)atof(tokens[5].c_str());
 	float h = (float)atof(tokens[6].c_str());
-
+	x = x + w / 2; y = y + h / 2;
 	CGameObject* obj = NULL;
 
 	switch (object_tag)
@@ -118,6 +118,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
 			return;
 		}
+		y = y - 120;
 		player = CMario::GetInstance();
 		obj = player;
 		obj->SetType(object_type);
