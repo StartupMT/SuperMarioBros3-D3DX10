@@ -13,6 +13,11 @@ CCollision* CCollision::GetInstance()
 	return __instance;
 }
 
+int CCollisionEvent::WasCollided() {
+	return
+		t >= 0.0f && t <= 1.0f && obj->IsDirectionColliable(nx, ny) == 1;
+}
+
 /*
 	SweptAABB
 */
@@ -201,7 +206,7 @@ void CCollision::Filter(LPGAMEOBJECT objSrc,
 			continue;
 		}
 
-		if (c->t < min_tx && c->nx != 0 && filterX == 1 && !c->obj->IsBlockingX()) {
+		if (c->t < min_tx && c->nx != 0 && filterX == 1) {
 			min_tx = c->t; min_ix = i;
 		}
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameObject.h"
 #include "Animation.h"
@@ -20,4 +20,11 @@ public:
 	void Update(DWORD dt) {}
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	int IsBlockingX() { return kind != 0; }
+	int IsDirectionColliable(float nx, float ny)
+	{
+		if (type == BLOCK_TYPE_WALL && kind == 1)	//Không va chạm color box X và Y
+			if (nx != COLLISION_NONE || ny == COLLISION_BOTTOM)
+				return 0;
+		return 1;
+	}
 };

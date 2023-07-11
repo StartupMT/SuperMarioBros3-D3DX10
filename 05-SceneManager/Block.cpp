@@ -14,6 +14,7 @@ void CBlock::Render()
 		CAnimations::GetInstance()->Get(ID_ANI_BLOCK + state + type)->Render(x, y);
 	if (kind == BLOCK_KIND_WALL)
 		RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void CBlock::GetBoundingBox(float& l, float& t, float& r, float& b)
