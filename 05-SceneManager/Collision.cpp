@@ -46,10 +46,10 @@ void CCollision::SweptAABB(
 	float br = dx > 0 ? mr + dx : mr;
 	float bb = dy > 0 ? mb + dy : mb;
 
-	if (br < sl || bl > sr || bb < st || bt > sb) return;
+	if ((dx == 0 && br < sl) || (dx == 0 && bl > sr) || (dy == 0 && bb < st) || (dy == 0 && bt > sb)) return;
 
 
-	if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
+	//if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
 
 	if (dx > 0)
 	{
@@ -255,7 +255,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 		{
 			if (colY->t < colX->t)	// was collision on Y first ?
 			{
-				y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
+				y += colY->t * dy;
 				objSrc->SetPosition(x, y);
 
 				objSrc->OnCollisionWith(colY);
@@ -278,7 +278,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 
 				if (colX_other != NULL)
 				{
-					x += colX_other->t * dx + colX_other->nx * BLOCK_PUSH_FACTOR;
+					x += colX_other->t * dx;
 					objSrc->OnCollisionWith(colX_other);
 				}
 				else
@@ -288,7 +288,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 			}
 			else // collision on X first
 			{
-				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
+				x += colX->t * dx;
 				objSrc->SetPosition(x, y);
 
 				objSrc->OnCollisionWith(colX);
@@ -311,7 +311,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 
 				if (colY_other != NULL)
 				{
-					y += colY_other->t * dy + colY_other->ny * BLOCK_PUSH_FACTOR;
+					y += colY_other->t * dy;
 					objSrc->OnCollisionWith(colY_other);
 				}
 				else
@@ -323,7 +323,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 		else
 			if (colX != NULL)
 			{
-				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
+				x += colX->t * dx;
 				y += dy;
 				objSrc->OnCollisionWith(colX);
 			}
@@ -331,7 +331,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 				if (colY != NULL)
 				{
 					x += dx;
-					y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
+					y += colY->t * dy;
 					objSrc->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 

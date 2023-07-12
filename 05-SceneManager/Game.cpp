@@ -313,6 +313,8 @@ LPTEXTURE CGame::LoadTexture(LPCWSTR texturePath)
 
 	pD3DDevice->CreateShaderResourceView(tex, &SRVDesc, &gSpriteTextureRV);
 
+	D3DX10FilterTexture(tex, 0, D3DX10_FILTER_MIRROR_U);
+
 	DebugOut(L"[INFO] Texture loaded Ok from file: %s \n", texturePath);
 
 	return new CTexture(tex, gSpriteTextureRV);
