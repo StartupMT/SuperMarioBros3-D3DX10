@@ -137,6 +137,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		{
 		case ENEMY_TYPE_GOOMBA:
 			obj = new CEnemy(x, y);
+			break;
+		case ENEMY_TYPE_KOOPA:
+			obj = new CEnemy(x, y);
 		}
 		break;
 	case OBJECT_TAG_ITEM: obj = new CItem(x, y); break;

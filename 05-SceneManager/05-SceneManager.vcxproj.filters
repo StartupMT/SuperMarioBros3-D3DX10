@@ -35,6 +35,9 @@
     <Filter Include="GameObject\Block">
       <UniqueIdentifier>{6e712034-c610-41e6-93a2-548568301e20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Enemy\Koopa">
+      <UniqueIdentifier>{9b841abd-4633-4111-af1a-e3e8887c1bda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Block.cpp">
       <Filter>GameObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopa.cpp">
+      <Filter>GameObject\Enemy\Koopa</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>GameObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopa.h">
+      <Filter>GameObject\Enemy\Koopa</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
