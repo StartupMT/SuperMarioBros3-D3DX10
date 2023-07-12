@@ -64,7 +64,7 @@
     <ClCompile Include="Item.cpp">
       <Filter>GameObject\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Goomba.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
@@ -124,7 +124,7 @@
     <ClInclude Include="Item.h">
       <Filter>GameObject\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Goomba.h">
+    <ClInclude Include="Enemy.h">
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">

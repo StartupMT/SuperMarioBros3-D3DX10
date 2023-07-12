@@ -75,7 +75,15 @@ public:
 	virtual int IsCollidable() { return 0; };
 
 	// When no collision has been detected (triggered by CCollision::Process)
-	virtual void OnNoCollision(DWORD dt) {};
+	virtual void OnNoCollision(DWORD dt) {
+		x += vx * dt;
+		y += vy * dt;
+		if (state != OBJECT_STATE_JUMP)
+		{
+			StartJump(0, 0);
+			isFall = true;
+		}
+	};
 
 	// When collision with an object has been detected (triggered by CCollision::Process)
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};

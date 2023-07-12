@@ -4,7 +4,7 @@
 #include "Mario.h"
 #include "Game.h"
 
-#include "Goomba.h"
+#include "Enemy.h"
 #include "Item.h"
 #include "Block.h"
 
@@ -30,9 +30,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	isCount = false;
 	MoveX();
+	JumpState();
+
+	if (state == OBJECT_STATE_DIE)
+	{
+		y += OBJECT_GRAVITY * dt;
+		return;
+	}
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
-	JumpState();
 }
 
 void CMario::OnNoCollision(DWORD dt)
@@ -64,7 +70,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 			vx = 0;
 		}
 
-	if (dynamic_cast<CGoomba*>(e->obj))
+	if (dynamic_cast<CEnemy*>(e->obj))
 		OnCollisionWithEnemy(e);
 	else if (dynamic_cast<CItem*>(e->obj))
 		OnCollisionWithItem(e);
@@ -74,23 +80,24 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithEnemy(LPCOLLISIONEVENT e)
 {
-	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+	CEnemy* enemy = dynamic_cast<CEnemy*>(e->obj);
 
-	// jump on top >> kill Goomba and deflect a bit 
+	// jump on top >> kill Enemy and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		if (enemy->GetState() != OBJECT_STATE_DIE)
 		{
-			goomba->SetState(GOOMBA_STATE_DIE);
+			StartJump();
+			enemy->SetState(OBJECT_STATE_DIE);
 		}
 	}
-	else // hit by Goomba
+	else // hit by Enemy
 	{
 		if (untouchable == 0)
 		{
-			if (goomba->GetState() != GOOMBA_STATE_DIE)
+			if (enemy->GetState() != OBJECT_STATE_DIE)
 			{
-
+				state = OBJECT_STATE_DIE;
 			}
 		}
 	}
@@ -124,8 +131,8 @@ void CMario::Render()
 	//Nếu đang trên không trung mà không có bay hoặc đụng đầu thì rơi
 	if (!isGround && vy < 0 && !isFly || isCollisionTop)
 	{
-		if (state != OBJECT_STATE_DIE)
-			Fall();
+		//if (state != OBJECT_STATE_DIE)
+		//	Fall();
 	}
 	//Nếu đang tấn công thì đổi trạng thái
 	state = isAttack ? OBJECT_STATE_ATTACK : state;

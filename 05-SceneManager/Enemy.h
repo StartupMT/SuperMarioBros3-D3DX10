@@ -1,27 +1,17 @@
 #pragma once
 #include "GameObject.h"
 
-#define GOOMBA_GRAVITY 0.002f
-#define GOOMBA_WALKING_SPEED 0.05f
+#define ID_ANI_ENEMY 200000
 
+#define ENEMY_BBOX_WIDTH 16
+#define ENEMY_BBOX_HEIGHT 14
+#define ENEMY_BBOX_HEIGHT_DIE 7
 
-#define GOOMBA_BBOX_WIDTH 16
-#define GOOMBA_BBOX_HEIGHT 14
-#define GOOMBA_BBOX_HEIGHT_DIE 7
+#define ENEMY_DIE_TIMEOUT 500
 
-#define GOOMBA_DIE_TIMEOUT 500
-
-#define GOOMBA_STATE_WALKING 100
-#define GOOMBA_STATE_DIE 200
-
-#define ID_ANI_GOOMBA_WALKING 5000
-#define ID_ANI_GOOMBA_DIE 5001
-
-class CGoomba : public CGameObject
+class CEnemy : public CGameObject
 {
 protected:
-	float ax;				
-	float ay; 
 
 	ULONGLONG die_start;
 
@@ -36,6 +26,6 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public: 	
-	CGoomba(float x, float y);
+	CEnemy(float x, float y);
 	virtual void SetState(int state);
 };
