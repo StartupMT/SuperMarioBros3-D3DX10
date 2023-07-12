@@ -57,25 +57,17 @@ void CMainKeyHandler::KeyState(BYTE* states)
 	if (game->IsKeyDown(DIK_RIGHT))
 	{
 		mario->direction = 1;
-		if (game->IsKeyDown(DIK_A))
-			mario->isRun = true;
-		else
-			mario->SetState(OBJECT_STATE_RUN);
+		mario->isRun = game->IsKeyDown(DIK_A);
+		mario->SetState(OBJECT_STATE_RUN);
 	}
 	else if (game->IsKeyDown(DIK_LEFT))
 	{
 		mario->direction = -1;
-		if (game->IsKeyDown(DIK_A))
-		{
-			mario->isRun = true;
-			mario->SetState(OBJECT_STATE_RUN);
-		}
-		else
-			mario->SetState(OBJECT_STATE_RUN);
+		mario->isRun = game->IsKeyDown(DIK_A);
+		mario->SetState(OBJECT_STATE_RUN);
 	}
-	else if (mario->GetState() != OBJECT_STATE_JUMP)
+	else
 	{
 		mario->direction = 0;
-		mario->SetState(OBJECT_STATE_STAND);
 	}
 }

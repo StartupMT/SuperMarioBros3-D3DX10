@@ -88,6 +88,7 @@ public:
 
 	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
 
+	virtual void Fall();
 	virtual void JumpState();
 	virtual void StartJump(float speed = OBJECT_JUMP_SPEED, float max = OBJECT_JUMP_HEIGHT, float gravity = OBJECT_GRAVITY);
 };

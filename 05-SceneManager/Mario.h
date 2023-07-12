@@ -22,9 +22,6 @@ class CMario : public CGameObject
 	static CMario* __instance;
 
 	BOOLEAN isSitting;
-	float maxVx;
-	float ax;				// acceleration on x 
-	float ay;				// acceleration on y 
 
 	bool untouchable;
 	ULONGLONG untouchable_start;
@@ -37,14 +34,18 @@ class CMario : public CGameObject
 	void OnCollisionWithBlock(LPCOLLISIONEVENT e);
 
 public:
-	int isRun = false;
+	int isGround = false, isCollisionTop = false;
+
+	int accCount = 0;
+	bool isRun = false, isBake = false, isMaxRunCount = false, isCount = false;
+	bool isSpeedJump = false, isFly = false, isFallDown = false;
+
+	int isAttack = false;
 
 public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
-		maxVx = 0.0f;
-		ax = 0.0f;
 		vy = OBJECT_GRAVITY;
 
 		state = OBJECT_STATE_STAND;
@@ -70,6 +71,8 @@ public:
 	void StartUntouchable() { untouchable = true; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+
+	void MoveX();
 
 	static CMario* GetInstance();
 };

@@ -39,6 +39,14 @@ void CGameObject::RenderBoundingBox()
 	CGame::GetInstance()->Draw(x - cx, y - cy, bbox, &rect, BBOX_ALPHA);
 }
 
+void CGameObject::Fall()
+{
+	state = OBJECT_STATE_JUMP;
+	isAllowJump = false;
+	isFall = true;
+	velYStartFall = 0.6;
+}
+
 //Trạng thái nhảy
 void CGameObject::JumpState()
 {

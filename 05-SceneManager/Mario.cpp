@@ -1,4 +1,4 @@
-#include <algorithm>
+﻿#include <algorithm>
 #include "debug.h"
 
 #include "Mario.h"
@@ -20,10 +20,7 @@ CMario* CMario::GetInstance()
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	//vy += ay * dt;
-	vx += ax * dt;
-
-	if (abs(vx) > abs(maxVx)) vx = maxVx;
+	isMaxRunCount = accCount >= MARIO_MAX_ACCEL_COUNT;
 
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount64() - untouchable_start > MARIO_UNTOUCHABLE_TIME)
@@ -31,6 +28,8 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable_start = 0;
 		untouchable = false;
 	}
+	isCount = false;
+	MoveX();
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 	JumpState();
@@ -111,10 +110,30 @@ void CMario::OnCollisionWithBlock(LPCOLLISIONEVENT e)
 
 void CMario::Render()
 {
-	int aniId = -1;
-	aniId = ID_ANI_MARIO + state + type;
+	int _state = 0;
+	if (state == OBJECT_STATE_RUN)
+	{
+		_state = isBake ? 3 : abs(vx) >= MARIO_MAX_SPEED ? 2 : abs(vx) >= MARIO_RUN_SPEED ? 1 : 0;
+		_state = vx == 0 ? 0 : _state;
+		state = vx == 0 ? OBJECT_STATE_STAND : state;
+	}
+	else if (state == OBJECT_STATE_JUMP)
+	{
+		_state = isFly ? 3 : isSpeedJump ? 2 : isFallDown;
+	}
+	//Nếu đang trên không trung mà không có bay hoặc đụng đầu thì rơi
+	if (!isGround && vy < 0 && !isFly || isCollisionTop)
+	{
+		if (state != OBJECT_STATE_DIE)
+			Fall();
+	}
+	//Nếu đang tấn công thì đổi trạng thái
+	state = isAttack ? OBJECT_STATE_ATTACK : state;
 
-	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
+	int aniId = -1;
+	aniId = ID_ANI_MARIO + type + state + _state;
+
+	CAnimations::GetInstance()->Get(aniId)->Render(x, y, direction);
 
 	RenderBoundingBox();
 	DebugOutTitle(L"Coins: %d", coin);
@@ -128,20 +147,20 @@ void CMario::SetState(int state)
 	switch (state)
 	{
 	case OBJECT_STATE_STAND:
+		this->state = state;
 		isAllowJump = true;
 		isFall = false;
 		vy = OBJECT_GRAVITY;
-		maxVx = 0;
-		ax = 0;
-		nx = 0;
-		if (direction != 0)
+		if (direction != 0 || vx != 0)
+		{
 			SetState(OBJECT_STATE_RUN);
+			return;
+		}
 		break;
 	case OBJECT_STATE_RUN:
+		if (this->state != OBJECT_STATE_STAND) return;
 		if (isSitting) break;
-		maxVx = direction * MARIO_WALK_SPEED;
-		ax = 1;
-		nx = direction;
+		//nx = direction;
 		break;
 	case OBJECT_STATE_JUMP:
 		if (this->state != state)
@@ -181,3 +200,92 @@ void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom
 	}
 }
 
+void CMario::MoveX()
+
+{
+
+	if (this->state == OBJECT_STATE_DIE) return;
+
+
+
+
+	if (CGame::GetInstance()->isFixUpdateFrame)
+
+	{
+
+		isCount = isRun;
+
+		if (isCount && !isBake)
+
+			accCount++;
+
+		else
+
+			accCount--;
+
+
+
+
+		accCount = accCount < 0 ? 0 : (accCount > MARIO_MAX_ACCEL_COUNT && isCount) ? MARIO_MAX_ACCEL_COUNT + 10 : accCount;
+
+	}
+
+	float accWalk = CGame::GetInstance()->isFixUpdateFrame ? MARIO_ACCEL_WALK : 0;
+
+	float speed = vx;
+
+	float speedRun = isRun ? MARIO_RUN_SPEED : MARIO_WALK_SPEED;
+
+	speedRun = isMaxRunCount ? MARIO_MAX_SPEED : speedRun;
+
+	isBake = false;
+
+	if (direction > 0 && state != OBJECT_STATE_SIT)
+
+	{
+
+		isBake = speed < 0 && state == OBJECT_STATE_RUN;
+
+		speed = speed < MARIO_WALK_SPEED ? speed + accWalk : speedRun;
+
+	}
+
+	else if (direction < 0 && state != OBJECT_STATE_SIT)
+
+	{
+
+		isBake = speed > 0 && state == OBJECT_STATE_RUN;
+
+		speed = speed > -MARIO_WALK_SPEED ? speed - accWalk : -speedRun;
+
+	}
+
+	else
+
+	{
+
+		if (speed > 0)
+
+		{
+
+			speed = speed - accWalk;
+
+			speed = speed < 0 ? 0 : speed;
+
+		}
+
+		else
+
+		{
+
+			speed = speed + accWalk;
+
+			speed = speed > 0 ? 0 : speed;
+
+		}
+
+	}
+
+	vx = speed;
+
+}
