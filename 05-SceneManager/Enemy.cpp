@@ -11,16 +11,16 @@ void CEnemy::GetBoundingBox(float &left, float &top, float &right, float &bottom
 	if (state == OBJECT_STATE_DIE)
 	{
 		left = x - ENEMY_BBOX_WIDTH / 2;
-		top = y /*- ENEMY_BBOX_HEIGHT_DIE / 2*/;
+		top = y - ENEMY_BBOX_HEIGHT_DIE / 2;
 		right = left + ENEMY_BBOX_WIDTH;
-		bottom = top + ENEMY_BBOX_HEIGHT_DIE;
+		bottom = y;
 	}
 	else
 	{
 		left = x - ENEMY_BBOX_WIDTH / 2;
-		top = y /*- ENEMY_BBOX_HEIGHT / 2*/;
+		top = y - ENEMY_BBOX_HEIGHT / 2;
 		right = left + ENEMY_BBOX_WIDTH;
-		bottom = top + ENEMY_BBOX_HEIGHT;
+		bottom = y;
 	}
 }
 
@@ -66,8 +66,13 @@ void CEnemy::Render()
 {
 	int aniId = ID_ANI_ENEMY + type + state + kind;
 	LPANIMATION anim = CAnimations::GetInstance()->Get(aniId);
+
 	if (anim != NULL)
-		anim->Render(x, y);
+	{
+		float l, t, r, b;
+		GetBoundingBox(l, t, r, b);
+		anim->Render(x, y, (b - t) / 2, vx);
+	}
 	RenderBoundingBox();
 }
 

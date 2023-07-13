@@ -35,9 +35,6 @@
     <Filter Include="GameObject\Block">
       <UniqueIdentifier>{6e712034-c610-41e6-93a2-548568301e20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Enemy\Koopa">
-      <UniqueIdentifier>{9b841abd-4633-4111-af1a-e3e8887c1bda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Block\BlockItem">
       <UniqueIdentifier>{16d15124-4fa4-42a4-a912-8d8fda47b84c}</UniqueIdentifier>
     </Filter>

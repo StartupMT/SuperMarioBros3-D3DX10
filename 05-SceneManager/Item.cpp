@@ -2,16 +2,21 @@
 
 void CItem::Render()
 {
-	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(ID_ANI_ITEM + state + type)->Render(x, y);
+	int aniId = ID_ANI_ITEM + type + state + kind;
+	LPANIMATION anim = CAnimations::GetInstance()->Get(aniId);
 
-	RenderBoundingBox();
+	if (anim != NULL)
+	{
+		float l, t, r, b;
+		GetBoundingBox(l, t, r, b);
+		anim->Render(x, y, (b - t) / 2, vx);
+	}
 }
 
 void CItem::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = x - ITEM_BBOX_WIDTH / 2;
-	t = y - ITEM_BBOX_HEIGHT / 2;
+	t = y - ITEM_BBOX_HEIGHT;
 	r = l + ITEM_BBOX_WIDTH;
-	b = t + ITEM_BBOX_HEIGHT;
+	b = y;
 }

@@ -17,7 +17,7 @@ class CAnimation
 public:
 	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
-	void Render(float x, float y, int direction = 1);
+	void Render(float x, float y, float cy = 0.0f, int direction = 1);
 };
 
 typedef CAnimation* LPANIMATION;
