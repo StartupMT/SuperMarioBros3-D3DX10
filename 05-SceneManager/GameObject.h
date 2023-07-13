@@ -41,6 +41,7 @@ public:
 	int direction = 0;
 	bool isAllowJump = true, isFall = false;
 
+	float sx, sy;
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -55,7 +56,7 @@ public:
 	bool IsDeleted() { return isDeleted; }
 	bool IsDraw() { return isDraw; }
 
-	void RenderBoundingBox();
+	void RenderBoundingBox(bool isb = false);
 
 	CGameObject();
 	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; state = OBJECT_STATE_STAND; }

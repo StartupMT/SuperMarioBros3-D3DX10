@@ -1,5 +1,10 @@
 #include "Item.h"
 
+CItem::CItem(float x, float y) :CGameObject(x, y)
+{
+	SetState(OBJECT_STATE_STAND);
+}
+
 void CItem::Render()
 {
 	int aniId = ID_ANI_ITEM + type + state + kind;
@@ -11,6 +16,17 @@ void CItem::Render()
 		GetBoundingBox(l, t, r, b);
 		anim->Render(x, y, (b - t) / 2, vx);
 	}
+	RenderBoundingBox(true);
+}
+
+void CItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	if (state == OBJECT_STATE_JUMP)
+		JumpState();
+	else
+		vy = OBJECT_GRAVITY;
+
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 void CItem::GetBoundingBox(float& l, float& t, float& r, float& b)
@@ -19,4 +35,20 @@ void CItem::GetBoundingBox(float& l, float& t, float& r, float& b)
 	t = y - ITEM_BBOX_HEIGHT;
 	r = l + ITEM_BBOX_WIDTH;
 	b = y;
+}
+
+
+void CItem::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (!e->obj->IsBlocking()) return;
+	if (e->obj->GetTag() == OBJECT_TAG_ENEMY || e->obj->GetTag() == OBJECT_TAG_ITEM) return;
+
+	if (e->ny < 0)
+	{
+		vy = 0;
+	}
+	else if (e->nx != 0)
+	{
+		vx = -vx;
+	}
 }

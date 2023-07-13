@@ -10,10 +10,13 @@
 
 class CItem : public CGameObject {
 public:
-	CItem(float x, float y) : CGameObject(x, y) { type = ITEM_TYPE_COIN; }
+	CItem(float x, float y);
 	~CItem() {};
 	void Render();
-	void Update(DWORD dt) {}
+	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	int IsBlocking() { return 0; }
+
+	virtual int IsCollidable() { return 1; };
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 };

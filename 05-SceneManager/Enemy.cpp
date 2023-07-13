@@ -73,7 +73,7 @@ void CEnemy::Render()
 		GetBoundingBox(l, t, r, b);
 		anim->Render(x, y, (b - t) / 2, vx);
 	}
-	RenderBoundingBox();
+	RenderBoundingBox(true);
 }
 
 void CEnemy::SetState(int state)
@@ -89,7 +89,6 @@ void CEnemy::SetState(int state)
 			return;
 		}
 		die_start = GetTickCount64();
-		y += (ENEMY_BBOX_HEIGHT - ENEMY_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
 		break;
