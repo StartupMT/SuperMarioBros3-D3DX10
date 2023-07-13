@@ -130,14 +130,17 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		{
 		case BLOCK_TYPE_WALL:
 			obj = new CBlock(x, y, w, h);
+			break;
+		case BLOCK_TYPE_QUESTION:
+			obj = new CBlock(x, y, w, h);
 		}
 		break;
 	case OBJECT_TAG_ENEMY:
 		switch (object_type)
 		{
-		/*case ENEMY_TYPE_GOOMBA:
+		case ENEMY_TYPE_GOOMBA:
 			obj = new CEnemy(x, y);
-			break;*/
+			break;
 		case ENEMY_TYPE_KOOPA:
 			obj = new CEnemy(x, y);
 		}
