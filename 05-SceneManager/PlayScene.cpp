@@ -140,9 +140,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		{
 		case ENEMY_TYPE_GOOMBA:
 			obj = new CEnemy(x, y);
+			if (object_kind == 1)
+				dynamic_cast<LPEnemy>(obj)->isJumpE = true;
 			break;
 		case ENEMY_TYPE_KOOPA:
 			obj = new CEnemy(x, y);
+			if (object_kind == 2)
+				dynamic_cast<LPEnemy>(obj)->isJumpE = true;
+			break;
 		}
 		break;
 	case OBJECT_TAG_ITEM: obj = new CItem(x, y); break;

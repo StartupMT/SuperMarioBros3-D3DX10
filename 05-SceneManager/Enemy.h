@@ -24,8 +24,11 @@ protected:
 	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
-
+public:
+	bool isJumpE = false;
 public: 	
 	CEnemy(float x, float y);
 	virtual void SetState(int state);
 };
+
+typedef CEnemy* LPEnemy;

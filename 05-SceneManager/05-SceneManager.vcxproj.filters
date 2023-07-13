@@ -98,9 +98,6 @@
     <ClCompile Include="Block.cpp">
       <Filter>GameObject\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Koopa.cpp">
-      <Filter>GameObject\Enemy\Koopa</Filter>
-    </ClCompile>
     <ClCompile Include="BlockItem.cpp">
       <Filter>GameObject\Block\BlockItem</Filter>
     </ClCompile>
@@ -169,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>GameObject\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Koopa.h">
-      <Filter>GameObject\Enemy\Koopa</Filter>
     </ClInclude>
     <ClInclude Include="BlockItem.h">
       <Filter>GameObject\Block\BlockItem</Filter>
