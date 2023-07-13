@@ -135,9 +135,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TAG_ENEMY:
 		switch (object_type)
 		{
-		case ENEMY_TYPE_GOOMBA:
+		/*case ENEMY_TYPE_GOOMBA:
 			obj = new CEnemy(x, y);
-			break;
+			break;*/
 		case ENEMY_TYPE_KOOPA:
 			obj = new CEnemy(x, y);
 		}

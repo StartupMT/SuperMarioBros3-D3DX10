@@ -21,7 +21,10 @@ LPANIMATION CAnimations::Get(int id)
 {
 	LPANIMATION ani = animations[id];
 	if (ani == NULL)
+	{
 		DebugOut(L"[ERROR] Animation ID %d not found\n", id);
+		return animations[200100];
+	}
 	return ani;
 }
 
