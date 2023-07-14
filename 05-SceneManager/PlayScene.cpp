@@ -123,7 +123,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		player = CMario::GetInstance();
 		obj = player;
 		obj->SetType(object_type);
-
+		obj->SetState(OBJECT_STATE_STAND);
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
 	case OBJECT_TAG_BLOCK:
@@ -309,6 +309,11 @@ void CPlayScene::Render()
 	map->Render();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+}
+
+void CPlayScene::AddObject(LPGAMEOBJECT obj)
+{
+	objects.push_back(obj);
 }
 
 /*

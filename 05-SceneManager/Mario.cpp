@@ -134,12 +134,7 @@ void CMario::OnCollisionWithItem(LPCOLLISIONEVENT e)
 	switch (item->GetType())
 	{
 	case ITEM_TYPE_COIN:
-		coin++;
-		if (coin >= MARIO_MAX_COIN)
-		{
-			coin = 0;
-			life++;
-		}
+		AddCoin();
 		break;
 	case ITEM_TYPE_SUPERMUSHROOM:
 		type += MARIO_TYPE_SMALL;
@@ -151,6 +146,16 @@ void CMario::OnCollisionWithItem(LPCOLLISIONEVENT e)
 	default:
 
 		break;
+	}
+}
+
+void CMario::AddCoin()
+{
+	coin++;
+	if (coin >= MARIO_MAX_COIN)
+	{
+		coin = 0;
+		life++;
 	}
 }
 

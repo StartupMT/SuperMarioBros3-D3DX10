@@ -75,5 +75,7 @@ public:
 
 	void MoveX();
 
+	void AddCoin();
+
 	static CMario* GetInstance();
 };

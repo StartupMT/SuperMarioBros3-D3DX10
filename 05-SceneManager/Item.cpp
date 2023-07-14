@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Mario.h"
 
 CItem::CItem(float x, float y) :CGameObject(x, y)
 {
@@ -25,7 +26,14 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		JumpState();
 	else
 		vy = OBJECT_GRAVITY;
-
+	if (vy > 0)
+	{
+		if (type == ITEM_TYPE_COIN)
+		{
+			Delete();
+			CMario::GetInstance()->AddCoin();
+		}
+	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
