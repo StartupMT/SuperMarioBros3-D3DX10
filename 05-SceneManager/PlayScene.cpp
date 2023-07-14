@@ -333,7 +333,10 @@ void CPlayScene::Clear()
 void CPlayScene::Unload()
 {
 	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i] == player) continue; //Don't delete mario
 		delete objects[i];
+	}
 
 	objects.clear();
 	player = NULL;

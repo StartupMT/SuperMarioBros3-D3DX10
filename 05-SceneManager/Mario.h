@@ -53,6 +53,7 @@ public:
 		untouchable = false;
 		untouchable_start = -1;
 		coin = 0;
+		life = MARIO_START_LIFE;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();

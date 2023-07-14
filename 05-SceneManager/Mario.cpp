@@ -14,7 +14,8 @@ CMario* CMario::__instance = NULL;
 
 CMario* CMario::GetInstance()
 {
-	if (__instance == NULL) __instance = new CMario(0, 0);
+	if (__instance == NULL) 
+		__instance = new CMario(0, 0);
 	return __instance;
 }
 
@@ -23,10 +24,16 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	isMaxRunCount = accCount >= MARIO_MAX_ACCEL_COUNT;
 
 	// reset untouchable timer if untouchable time has passed
-	if (GetTickCount64() - untouchable_start > MARIO_UNTOUCHABLE_TIME)
+	if (untouchable)
 	{
-		untouchable_start = 0;
-		untouchable = false;
+		ULONGLONG time = GetTickCount64() - untouchable_start;
+		isDraw = (int)(time / 100) % 2;
+		if (time > MARIO_UNTOUCHABLE_TIME)
+		{
+			untouchable_start = 0;
+			untouchable = false;
+
+		}
 	}
 	isCount = false;
 	MoveX();
@@ -97,11 +104,23 @@ void CMario::OnCollisionWithEnemy(LPCOLLISIONEVENT e)
 	}
 	else // hit by Enemy
 	{
-		if (untouchable == 0)
+		if (!untouchable)
 		{
 			if (enemy->GetState() != OBJECT_STATE_DIE)
 			{
-				state = OBJECT_STATE_DIE;
+				type -= MARIO_TYPE_SMALL;
+				if (type < MARIO_TYPE_SMALL)
+				{
+					state = OBJECT_STATE_DIE;
+					type = MARIO_TYPE_SMALL;
+					life--;
+					CGame::GetInstance()->InitiateSwitchScene(1);
+					CGame::GetInstance()->SwitchScene();
+				}
+				else
+				{
+					StartUntouchable();
+				}
 			}
 		}
 	}
@@ -110,7 +129,29 @@ void CMario::OnCollisionWithEnemy(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithItem(LPCOLLISIONEVENT e)
 {
 	e->obj->Delete();
-	coin++;
+	CItem* item = dynamic_cast<CItem*>(e->obj);
+
+	switch (item->GetType())
+	{
+	case ITEM_TYPE_COIN:
+		coin++;
+		if (coin >= MARIO_MAX_COIN)
+		{
+			coin = 0;
+			life++;
+		}
+		break;
+	case ITEM_TYPE_SUPERMUSHROOM:
+		type += MARIO_TYPE_SMALL;
+		type = type > MARIO_TYPE_RACCCOON ? MARIO_TYPE_RACCCOON : type;
+		break;
+	case ITEM_TYPE_UPMUSHROOM:
+		life++;
+		break;
+	default:
+
+		break;
+	}
 }
 
 void CMario::OnCollisionWithBlock(LPCOLLISIONEVENT e)
@@ -133,6 +174,7 @@ void CMario::OnCollisionWithBlock(LPCOLLISIONEVENT e)
 
 void CMario::Render()
 {
+	if (!isDraw) return;
 	int _state = 0;
 	if (state == OBJECT_STATE_RUN)
 	{
@@ -165,13 +207,13 @@ void CMario::Render()
 	}
 
 	RenderBoundingBox();
-	DebugOutTitle(L"Coins: %d", coin);
+	DebugOutTitle(L"Coins: %d \t Lifes: %d", coin, life);
 }
 
 void CMario::SetState(int state)
 {
 	// DIE is the end state, cannot be changed! 
-	if (this->state == OBJECT_STATE_DIE) return;
+	//if (this->state == OBJECT_STATE_DIE) return;
 
 	switch (state)
 	{

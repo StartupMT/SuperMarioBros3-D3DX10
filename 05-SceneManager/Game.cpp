@@ -512,7 +512,7 @@ void CGame::Load(LPCWSTR gameFile)
 
 void CGame::SwitchScene()
 {
-	if (next_scene < 0 || next_scene == current_scene) return; 
+	if (next_scene < 0) return; 
 
 	DebugOut(L"[INFO] Switching to scene %d\n", next_scene);
 

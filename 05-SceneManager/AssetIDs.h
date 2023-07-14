@@ -56,3 +56,5 @@
 #define MARIO_JUMP_MAX_SPEED	-0.18f
 #define MARIO_JUMP_HEIGHT	64
 	//
+#define MARIO_MAX_COIN	100
+#define MARIO_START_LIFE	3
