@@ -26,13 +26,18 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		JumpState();
 	else
 		vy = OBJECT_GRAVITY;
-	if (vy > 0)
+	if (type == ITEM_TYPE_COIN)
 	{
-		if (type == ITEM_TYPE_COIN)
+		if (state == OBJECT_STATE_JUMP)
 		{
-			Delete();
-			CMario::GetInstance()->AddCoin();
+			if (vy > 0)
+			{
+				Delete();
+				CMario::GetInstance()->AddCoin();
+			}
 		}
+		else
+			vy = 0;
 	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

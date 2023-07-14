@@ -18,5 +18,9 @@ public:
 	int IsBlocking() { return 0; }
 
 	virtual int IsCollidable() { return 1; };
+	virtual void OnNoCollision(DWORD dt) {
+		x += vx * dt;
+		y += vy * dt;
+	};
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 };
