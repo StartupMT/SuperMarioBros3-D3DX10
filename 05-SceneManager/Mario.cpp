@@ -63,6 +63,10 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 				SetState(OBJECT_STATE_STAND);
 			vy = OBJECT_GRAVITY;
 		}
+		else
+		{
+			Fall(); //Đụng đầu thì rơi
+		}
 	}
 	else
 		if (e->nx != 0 && e->obj->IsBlocking())
@@ -113,6 +117,18 @@ void CMario::OnCollisionWithBlock(LPCOLLISIONEVENT e)
 {
 	//CPortal* p = (CPortal*)e->obj;
 	//CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
+	CBlock* block = dynamic_cast<CBlock*>(e->obj);
+	switch (block->GetType())
+	{
+	case BLOCK_TYPE_QUESTION:
+		if (e->ny > 0 && block->GetState() == OBJECT_STATE_RUN)
+		{
+			block->StartJump();
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void CMario::Render()

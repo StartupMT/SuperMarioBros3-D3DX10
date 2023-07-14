@@ -40,18 +40,17 @@ void CSprite::Draw(float x, float y, float cY, int direction)
 	cy = (FLOAT)floor(cy);
 
 	D3DXMATRIX matTranslation;
-
+	
 	x = (FLOAT)floor(x);
 	y = (FLOAT)floor(y);
 
 	int spriteWidth = (this->right - this->left + 1);
 	int spriteHeight = (this->bottom - this->top + 1);
-	cY = cY != 0 ? spriteHeight / 2 : cY;
+	cY = cY != 0 ? spriteHeight/2 : cY;
 	D3DXMatrixTranslation(&matTranslation, x - cx, g->GetBackBufferHeight() - y + cy + cY, 0.1f);
 
 
 	D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth * (direction < 0 ? 1 : 1), (FLOAT)spriteHeight, 1.0f);
-
 	this->sprite.matWorld = (this->matScaling * matTranslation);
 
 	g->GetSpriteHandler()->DrawSpritesImmediate(&sprite, 1, 0, 0);

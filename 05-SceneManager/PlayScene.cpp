@@ -10,6 +10,7 @@
 #include "Sprites.h"
 #include "Item.h"
 #include "Block.h"
+#include "BlockItem.h"
 
 #include "MainKeyEventHandler.h"
 
@@ -132,7 +133,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			obj = new CBlock(x, y, w, h);
 			break;
 		case BLOCK_TYPE_QUESTION:
-			obj = new CBlock(x, y, w, h);
+			obj = new CBlockItem(x, y, w, h);
+			obj->sy = y;
+			break;
 		}
 		break;
 	case OBJECT_TAG_ENEMY:
@@ -150,7 +153,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			break;
 		}
 		break;
-	case OBJECT_TAG_ITEM: obj = new CItem(x, y); break;
+	case OBJECT_TAG_ITEM:
+		obj = new CItem(x, y);
+		break;
 
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);

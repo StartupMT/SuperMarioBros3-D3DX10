@@ -16,8 +16,8 @@ protected:
 public:
 	CBlock(float x, float y, float w, float h);
 	~CBlock() {};
-	void Render();
-	void Update(DWORD dt) {}
+	void Render() { RenderBoundingBox(); };
+	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {};
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	int IsBlockingX() { return kind != 0; }
 	int IsDirectionColliable(float nx, float ny)
@@ -27,4 +27,7 @@ public:
 				return 0;
 		return 1;
 	}
+
+	virtual int IsCollidable() { return 0; };
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
 };
