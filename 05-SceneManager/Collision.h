@@ -89,5 +89,6 @@ public:
 
 	void Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 
+	static bool isCollision(float x, float y, RECT other);
 	static CCollision* GetInstance();
 };

@@ -28,6 +28,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
 #define SCENE_SECTION_BACKGROUND	3
+#define SCENE_SECTION_WALLVIEW	4
 
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
@@ -198,6 +199,20 @@ void CPlayScene::_ParseSection_BACKGROUND(string line)
 	map->HeightMap++;
 }
 
+void CPlayScene::_ParseSection_VIEW(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 4) return;
+	//X		Y	W	H
+	float x = atoi(tokens[0].c_str());
+	float y = atoi(tokens[1].c_str());
+	float w = atoi(tokens[2].c_str());
+	float h = atoi(tokens[3].c_str());
+	RECT rect = { x , y , w, h };
+	rectView.push_back(rect);
+}
+
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
 {
 	DebugOut(L"[INFO] Start loading assets from : %s \n", assetFile);
@@ -252,6 +267,7 @@ void CPlayScene::Load()
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
 		if (line == "[BACKGROUND]") { section = SCENE_SECTION_BACKGROUND; map->HeightMap = 0; continue; };
+		if (line == "[WALLVIEW]") { section = SCENE_SECTION_WALLVIEW; continue; };
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
 
 		//
@@ -262,6 +278,7 @@ void CPlayScene::Load()
 			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break; 
 			case SCENE_SECTION_BACKGROUND: _ParseSection_BACKGROUND(line); break;
+			case SCENE_SECTION_WALLVIEW: _ParseSection_VIEW(line); break;
 		}
 	}
 
@@ -292,12 +309,25 @@ void CPlayScene::Update(DWORD dt)
 	// Update camera to follow mario
 	float cx, cy;
 	player->GetPosition(cx, cy);
+	RECT _rect = rectView[0];
+	for (size_t i = 0; i < rectView.size(); i++)
+	{
+		if (CCollision::isCollision(cx, cy, rectView[i]))
+		{
+			_rect = rectView[i];
+			break;
+		}
+	}
 
 	CGame *game = CGame::GetInstance();
 	cx -= game->GetBackBufferWidth() / 2;
 	cy -= game->GetBackBufferHeight() / 2;
 
 	if (cx < 0) cx = 0;
+	if (cy + game->GetBackBufferHeight() > _rect.bottom)
+		cy = _rect.bottom - game->GetBackBufferHeight();
+	else if (cy < _rect.top)
+		cy = _rect.top;
 
 	CGame::GetInstance()->SetCamPos(cx, cy);
 

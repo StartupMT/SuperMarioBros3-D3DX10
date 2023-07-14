@@ -24,9 +24,11 @@ protected:
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_BACKGROUND(string line);
+	void _ParseSection_VIEW(string line);
 
 	void LoadAssets(LPCWSTR assetFile);
 	
+	vector<RECT> rectView;
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
 

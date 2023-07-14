@@ -358,3 +358,8 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
+
+bool CCollision::isCollision(float x, float y, RECT other)
+{
+	return !(x < other.left || x > other.right || y > other.top || y < other.bottom);
+}
