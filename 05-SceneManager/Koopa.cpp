@@ -7,20 +7,26 @@ CKoopa::CKoopa(float x, float y) :CEnemy(x, y)
 	SetState(OBJECT_STATE_RUN);
 }
 
-void CKoopa::OnNoCollision(DWORD dt)
-{
-	x += vx * dt;
-	y += vy * dt;
-};
-
 void CKoopa::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
-	if (dynamic_cast<CKoopa*>(e->obj)) return;
+	if (e->obj->GetTag() == OBJECT_TAG_ENEMY || e->obj->GetTag() == OBJECT_TAG_ITEM || state == OBJECT_STATE_DIE) return;
 
-	if (e->ny != 0)
+	if (e->ny < 0)
 	{
 		vy = 0;
+		float l, t, r, b;
+		e->obj->GetBoundingBox(l, t, r, b);
+		if (isJumpE)
+			StartJump();
+		if (x < l)
+		{
+			vx = OBJECT_RUN_SPEED;
+		}
+		else if (x > r)
+		{
+			vx = -OBJECT_RUN_SPEED;
+		}
 	}
 	else if (e->nx != 0)
 	{
