@@ -148,7 +148,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 				dynamic_cast<LPEnemy>(obj)->isJumpE = true;
 			break;
 		case ENEMY_TYPE_KOOPA:
-			obj = new CEnemy(x, y);
+			obj = new CKoopa(x, y);
 			if (object_kind == 2)
 				dynamic_cast<LPEnemy>(obj)->isJumpE = true;
 			break;
