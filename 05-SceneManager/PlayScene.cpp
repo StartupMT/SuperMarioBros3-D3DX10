@@ -16,7 +16,7 @@
 
 using namespace std;
 
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
+CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
 	player = NULL;
@@ -319,6 +319,7 @@ void CPlayScene::Update(DWORD dt)
 			objects[i]->Update(dt, &coObjects);
 		else if (CCollision::isCollision(x, y, boundCamera))
 		{
+			objects[i]->SetDraw(true);
 			objects[i]->Update(dt, &coObjects);
 		}
 		else
@@ -331,6 +332,14 @@ void CPlayScene::Update(DWORD dt)
 	if (player == NULL) return;
 	// Update camera to follow mario
 	player->GetPosition(cx, cy);
+
+	//////Check die
+	//if (cy > 720)
+	//{
+	//	CGame::GetInstance()->InitiateSwitchScene(1);
+	//	CGame::GetInstance()->SwitchScene();
+	//}
+
 	RECT _rect = rectView[0];
 	for (size_t i = 0; i < rectView.size(); i++)
 	{
@@ -340,9 +349,6 @@ void CPlayScene::Update(DWORD dt)
 			break;
 		}
 	}
-
-	CGame::GetInstance()->InitiateSwitchScene(1);
-	CGame::GetInstance()->SwitchScene();
 
 	cx -= width / 2;
 	cy -= height / 2;
@@ -354,6 +360,9 @@ void CPlayScene::Update(DWORD dt)
 		cy = _rect.top;
 
 	CGame::GetInstance()->SetCamPos(cx, cy);
+
+	CGame::GetInstance()->InitiateSwitchScene(1);
+	CGame::GetInstance()->SwitchScene();
 
 	PurgeDeletedObjects();
 }
