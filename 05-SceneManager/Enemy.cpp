@@ -64,6 +64,8 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CEnemy::Render()
 {
+	if (!isDraw) return;
+
 	int aniId = ID_ANI_ENEMY + type + state + kind;
 	LPANIMATION anim = CAnimations::GetInstance()->Get(aniId);
 

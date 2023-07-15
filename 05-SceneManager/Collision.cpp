@@ -361,5 +361,5 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 
 bool CCollision::isCollision(float x, float y, RECT other)
 {
-	return !(x < other.left || x > other.right || y > other.top || y < other.bottom);
+	return !(x < other.left || x > other.right || y < other.top || y > other.bottom);
 }

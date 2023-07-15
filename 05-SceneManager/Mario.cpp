@@ -211,7 +211,7 @@ void CMario::Render()
 		anim->Render(x, y, (b - t) / 2, vx);
 	}
 
-	RenderBoundingBox();
+	RenderBoundingBox(true);
 	DebugOutTitle(L"Coins: %d \t Lifes: %d", coin, life);
 }
 
@@ -279,89 +279,43 @@ void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom
 void CMario::MoveX()
 
 {
-
 	if (this->state == OBJECT_STATE_DIE) return;
-
-
-
-
 	if (CGame::GetInstance()->isFixUpdateFrame)
-
 	{
-
 		isCount = isRun;
-
 		if (isCount && !isBake)
-
 			accCount++;
-
 		else
-
 			accCount--;
-
-
-
-
 		accCount = accCount < 0 ? 0 : (accCount > MARIO_MAX_ACCEL_COUNT && isCount) ? MARIO_MAX_ACCEL_COUNT + 10 : accCount;
-
 	}
-
 	float accWalk = CGame::GetInstance()->isFixUpdateFrame ? MARIO_ACCEL_WALK : 0;
-
 	float speed = vx;
-
 	float speedRun = isRun ? MARIO_RUN_SPEED : MARIO_WALK_SPEED;
-
 	speedRun = isMaxRunCount ? MARIO_MAX_SPEED : speedRun;
-
 	isBake = false;
-
 	if (direction > 0 && state != OBJECT_STATE_SIT)
-
 	{
-
 		isBake = speed < 0 && state == OBJECT_STATE_RUN;
-
 		speed = speed < MARIO_WALK_SPEED ? speed + accWalk : speedRun;
-
 	}
-
 	else if (direction < 0 && state != OBJECT_STATE_SIT)
-
 	{
-
 		isBake = speed > 0 && state == OBJECT_STATE_RUN;
-
 		speed = speed > -MARIO_WALK_SPEED ? speed - accWalk : -speedRun;
-
 	}
-
 	else
-
 	{
-
 		if (speed > 0)
-
 		{
-
 			speed = speed - accWalk;
-
 			speed = speed < 0 ? 0 : speed;
-
 		}
-
 		else
-
 		{
-
 			speed = speed + accWalk;
-
 			speed = speed > 0 ? 0 : speed;
-
 		}
-
 	}
-
 	vx = speed;
-
 }

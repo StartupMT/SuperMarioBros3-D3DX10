@@ -6,6 +6,8 @@
 
 void CBlockItem::Render()
 {
+	if (!isDraw) return;
+
 	int aniId = ID_ANI_BLOCK + type + state;
 	LPANIMATION anim = CAnimations::GetInstance()->Get(aniId);
 

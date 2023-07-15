@@ -8,6 +8,8 @@ CItem::CItem(float x, float y) :CGameObject(x, y)
 
 void CItem::Render()
 {
+	if (!isDraw) return;
+
 	int aniId = ID_ANI_ITEM + type + state + kind;
 	LPANIMATION anim = CAnimations::GetInstance()->Get(aniId);
 

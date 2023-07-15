@@ -260,7 +260,7 @@ void CPlayScene::Load()
 	f.open(sceneFilePath);
 
 	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;					
+	int section = SCENE_SECTION_UNKNOWN;
 
 	char str[MAX_SCENE_LINE];
 	while (f.getline(str, MAX_SCENE_LINE))
@@ -272,17 +272,17 @@ void CPlayScene::Load()
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
 		if (line == "[BACKGROUND]") { section = SCENE_SECTION_BACKGROUND; map->HeightMap = 0; continue; };
 		if (line == "[WALLVIEW]") { section = SCENE_SECTION_WALLVIEW; continue; };
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
+		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
 		// data section
 		//
 		switch (section)
-		{ 
-			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break; 
-			case SCENE_SECTION_BACKGROUND: _ParseSection_BACKGROUND(line); break;
-			case SCENE_SECTION_WALLVIEW: _ParseSection_VIEW(line); break;
+		{
+		case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
+		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		case SCENE_SECTION_BACKGROUND: _ParseSection_BACKGROUND(line); break;
+		case SCENE_SECTION_WALLVIEW: _ParseSection_VIEW(line); break;
 		}
 	}
 
@@ -294,6 +294,16 @@ void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
+	float cx, cy;
+	RECT boundCamera;
+	float width = CGame::GetInstance()->GetBackBufferWidth();
+	float height = CGame::GetInstance()->GetBackBufferHeight();
+
+	CGame::GetInstance()->GetCamPos(cx, cy);
+	boundCamera.left = cx - 32;
+	boundCamera.top = cy - 32;
+	boundCamera.right = boundCamera.left + width + 32;
+	boundCamera.bottom = boundCamera.top + height + 32;
 
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 0; i < objects.size(); i++)
@@ -304,14 +314,22 @@ void CPlayScene::Update(DWORD dt)
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		objects[i]->Update(dt, &coObjects);
+		float x, y; objects[i]->GetPosition(x, y);
+		if (objects[i]->GetTag() == OBJECT_TAG_PLAYER)
+			objects[i]->Update(dt, &coObjects);
+		else if (CCollision::isCollision(x, y, boundCamera))
+		{
+			objects[i]->Update(dt, &coObjects);
+		}
+		else
+		{
+			objects[i]->SetDraw(false);
+		}
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	if (player == NULL) return; 
-
+	if (player == NULL) return;
 	// Update camera to follow mario
-	float cx, cy;
 	player->GetPosition(cx, cy);
 	RECT _rect = rectView[0];
 	for (size_t i = 0; i < rectView.size(); i++)
@@ -323,13 +341,15 @@ void CPlayScene::Update(DWORD dt)
 		}
 	}
 
-	CGame *game = CGame::GetInstance();
-	cx -= game->GetBackBufferWidth() / 2;
-	cy -= game->GetBackBufferHeight() / 2;
+	CGame::GetInstance()->InitiateSwitchScene(1);
+	CGame::GetInstance()->SwitchScene();
+
+	cx -= width / 2;
+	cy -= height / 2;
 
 	if (cx < 0) cx = 0;
-	if (cy + game->GetBackBufferHeight() > _rect.bottom)
-		cy = _rect.bottom - game->GetBackBufferHeight();
+	if (cy + height > _rect.bottom)
+		cy = _rect.bottom - height;
 	else if (cy < _rect.top)
 		cy = _rect.top;
 
@@ -366,7 +386,7 @@ void CPlayScene::Clear()
 /*
 	Unload scene
 
-	TODO: Beside objects, we need to clean up sprites, animations and textures as well 
+	TODO: Beside objects, we need to clean up sprites, animations and textures as well
 
 */
 void CPlayScene::Unload()
